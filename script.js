@@ -77,7 +77,7 @@ data.author    // the author
        throw new Error("HTTP " + response.status);
      }
      return response.json();}).then(function (data) {
-
+     /* this is what is left from TODO4 */
      }).catch(function (err) {
       throw new Error("HTTP " + response.status);
      });
