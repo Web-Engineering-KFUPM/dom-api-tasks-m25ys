@@ -19,7 +19,7 @@ inside the <p> element with id="t1-msg".
 💡 Hint:
 document.getElementById("t1-msg").innerHTML = "Hello, World!";
 */
- 
+ document.getElementById("t1-msg").innerHTML = "Hello, World!";
 
 /*  
 =======================================
@@ -40,7 +40,11 @@ button.addEventListener("click", function () {
     // change text here
 });
 */
- 
+const button = document.getElementById("t2-btn")
+button.addEventListener("click", function(){
+const el = document.getElementById("t2-status");
+el.textContent = "You clicked the button!"
+})
 
 /*  
 =======================================
@@ -68,7 +72,15 @@ Use:
 data.content   // the quote text
 data.author    // the author
 */
- 
+ fetch("https://dummyjson.com/quotes/random").then (function(response){
+ if (!response.ok) {
+       throw new Error("HTTP " + response.status);
+     }
+     return response.json();}).then(function (data) {
+
+     }).catch(function (err) {
+      throw new Error("HTTP " + response.status);
+     });
 
 /*  
 =======================================
