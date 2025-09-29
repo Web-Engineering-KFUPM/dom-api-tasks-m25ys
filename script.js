@@ -72,15 +72,23 @@ Use:
 data.content   // the quote text
 data.author    // the author
 */
- fetch("https://dummyjson.com/quotes/random").then (function(response){
- if (!response.ok) {
-       throw new Error("HTTP " + response.status);
-     }
-     return response.json();}).then(function (data) {
-     /* this is what is left from TODO4 */
-     }).catch(function (err) {
-      throw new Error("HTTP " + response.status);
-     });
+document.getElementById("t3-loadQuote").addEventListener("click", function () {
+  fetch("https://dummyjson.com/quotes/random")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      document.getElementById("t3-quote").textContent = data.quote || data.content;
+      document.getElementById("t3-author").textContent = data.author;
+    })
+    .catch(function (err) {
+      console.error("Fetch error:", err);
+    });
+});
+
 
 /*  
 =======================================
@@ -106,3 +114,21 @@ data.main.temp      → temperature (°C)
 data.main.humidity  → humidity (%)
 data.wind.speed     → wind speed (m/s)
 */
+document.getElementById("t4-loadWx").addEventListener("click", function () {
+  fetch("https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&appid=42d480de9de583d08680470f15249931")
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("HTTP " + response.status);
+      }
+      return response.json();
+    })
+    .then(function (data) {
+      document.getElementById("t4-temp").textContent = data.main.temp + " °C";
+      document.getElementById("t4-hum").textContent = data.main.humidity + " %";
+      document.getElementById("t4-wind").textContent = data.wind.speed + " m/s";
+    })
+    .catch(function (err) {
+      console.error("Weather fetch error:", err);
+    });
+});
+
